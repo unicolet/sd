@@ -7,9 +7,6 @@ before_install:
    - sudo apt-get -qq update
    - echo 127.0.0.1 salt | sudo tee -a /etc/hosts
    - sudo apt-get install -y salt-minion salt-master
-   - sudo salt-master &
-   - sleep 3
-   - sudo salt-minion &
-   - sleep 3
+   - sleep 10
    - sudo salt-key -A -y
 script: salt '*' test.ping
