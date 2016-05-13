@@ -9,4 +9,5 @@ before_install:
    - sudo apt-get install -y salt-minion salt-master
    - sleep 10
    - sudo salt-key -A -y
+   - sleep 10
 script: sudo salt '*' test.ping
