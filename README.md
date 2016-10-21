@@ -5,7 +5,7 @@
 
 Inspired by SmartStack[1]. Based on SaltStack and HAProxy.
 
-![Overview](img/overview.png "Overview")  
+![Overview](img/a_overview.png "Overview")  
 
 ## Introduction
 As applications move from monolithic architectures to service-oriented/microservices they face a new problem: how do services map and discover each other? How do these mappings dynamically update in response to failures or new deployments?
