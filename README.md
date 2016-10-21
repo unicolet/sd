@@ -40,6 +40,7 @@ A temporary failure of the Salt master will not block the application simply bec
 After the Salt master has been brought back online a configuration refresh can be manually forced by running the same orchestration used by the solution.
 
 The failure of a single node during the reconfiguration phase can be handled in many different ways, depending on the application needs and operating mode:
+
 1. by stopping the configuration change until the node is fixed or removed
 2. by continuing anyway, but the node will not receive any requests until it is back online and a new configuration refresh request is received by the master
 3. by performing additional checks like a ping or a recovery attempt and then acting on the outcome
