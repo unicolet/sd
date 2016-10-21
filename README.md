@@ -101,6 +101,9 @@ https://github.com/unicolet/sd
 
 ### References
 [1] http://nerds.airbnb.com/smartstack-service-discovery-cloud/
+
 [2] https://docs.saltstack.com/en/latest/topics/tutorials/intro_scale.html
+
 [3] https://github.com/saltstack/salt/issues/19926
+
 [4] https://github.com/saltstack/salt/pull/19323
