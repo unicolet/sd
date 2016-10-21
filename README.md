@@ -4,7 +4,8 @@
 **Summary**: a simplified, event-based approach at Service Discovery in a SOA/microservice architecture that attempts to be fully transparent, unobtrusive and light on dependencies.
 
 Inspired by SmartStack[1]. Based on SaltStack and HAProxy.
-  
+
+![Overview](img/overview.png "Overview")  
 
 ## Introduction
 As applications move from monolithic architectures to service-oriented/microservices they face a new problem: how do services map and discover each other? How do these mappings dynamically update in response to failures or new deployments?
@@ -90,6 +91,7 @@ Inspection mode: a node will stop processing configuration refreshes allowing in
 
 ### Activity tracker
 The project is tracked with a public Trello board:
+
 https://trello.com/b/9SLkJGSN/saltstack-service-discovery
 
 
