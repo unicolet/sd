@@ -1,6 +1,5 @@
 # Service Discovery with SaltStack and HAProxy
 
-
 **Summary**: a simplified, event-based approach at Service Discovery in a SOA/microservice architecture that attempts to be fully transparent, unobtrusive and light on dependencies.
 
 Inspired by SmartStack[1]. Based on SaltStack and HAProxy.
@@ -50,9 +49,7 @@ The failure of a single node during the reconfiguration phase can be handled in 
 The solution inherits the scalability limits of Saltstack[2]. According to experiences learned on various publicly available SaltStack support channels, on very large deployments the CPU power spent by the master coordinating nodes and especially performing encryption is not trivial and might cause the occasional timeout, thus failing a configuration refresh and perhaps an application failure. Fortunately the situation is rapidly improving[3][4] on this front so the limit will be hopefully raised up to the point it will not be an issue for most deployments. The performance tuning guide for Saltstack can be used as reference for such environments[2].
 Optionally the solution can be modified to make use of an external returner thus freeing the Salt master from some of the work.
 
-
 When a service is deployed on an existing node the local port might need to be freed by HAProxy to allow the service to bind to it. This can be achieved as a simple one-line run time instruction to HAProxy that can be added to the service start script or deployment module.
-
 
 In the case of a hung service with a client running on the same host, the client will fail as there is no HAProxy load balancing for fully local (client and server that are both on the same host) requests. However, hung services can be detected and healed by means of SaltStack automation features.
 If the service stops altogether the solution will detect and fix the problem by spawning a new HAProxy frontend to replace the failed service.
@@ -61,48 +58,43 @@ If the service stops altogether the solution will detect and fix the problem by 
 
 For those already using or considering Saltstack the requirements are trivial and anyway much lower than any other comparable solution. Smartstack for instance requires a Zookeeper instance (3 nodes) and 2 services in addition to HAProxy on each node. Also the services are continuously polling Zookeeper for changes.
 
-
 Compact: at a few hundreds LOC (python) it is so self-contained that most teams will be able to ‘learn it’ in just a few days. Evaluation should take 1-2 day.
-
 
 A simpler stack: less software to manage means less chances for things to break. In this case just two are needed: SaltStack and HAProxy.
 
-
 Service discovery is fully automated and requires little to no configuration. The solution simply scans for open ports on the node and when it finds a new one open in the 3000-10000 range it will treat it as a new service and request a configuration refresh. The solution also handles out-of-the-box some well-known ports like redis, postgres, mysql and rabbitmq in tcp mode, leaving all others in http mode. Adding other ports is as simple as writing a few lines of python.
-
 
 The same configuration used on the developer machine (everything on localhost) can be used for production, simplifying everything: from delivery to testing and configuration.
 
-
 Thanks to its event-based architecture, the solution will use no network bandwidth in stable conditions (except for the bandwidth required by the keeping of the Salt minion connection to the master).
-
 
 ## Other features
 
 Configuration storms: the solution implements an experimental rate-limiting state (which will be likely contributed back to SaltStack as a state) to limit the number of configuration refreshes the nodes can request in given time frame. This is useful in case many nodes are deployed/undeployed at once or immediately after the system has been brought online.
 
-
 Panic mode: the solution comes with a big-red-button(tm) that can be used to enter panic mode in which no more configuration refreshes will be allowed. This can be useful in conditions when a service or a part of the infrastructure is flapping.
 
-
 Maintenance mode: in maintenance mode a node or any set of nodes as targeted by SaltStack is removed from all HAProxy configurations.
-
 
 Inspection mode: a node will stop processing configuration refreshes allowing inspection of its status.
 
 ### Activity tracker
-The project is tracked with a public Trello board:
+
+The project is tracked on a public Trello board:
 
 https://trello.com/b/9SLkJGSN/saltstack-service-discovery
 
 
 ### POC Source:
-https://github.com/unicolet/sd
 
+https://github.com/unicolet/sd
 
 ### References
 
 [1] http://nerds.airbnb.com/smartstack-service-discovery-cloud/
+
 [2] https://docs.saltstack.com/en/latest/topics/tutorials/intro_scale.html
+
 [3] https://github.com/saltstack/salt/issues/19926
+
 [4] https://github.com/saltstack/salt/pull/19323
